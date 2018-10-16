@@ -38,7 +38,7 @@ namespace RimTwitch
             var mySlice = fourth.TopHalf();
             
             Widgets.Label(mySlice.LeftHalf(), oauth.description);
-            //_settings.oauth = Widgets.TextArea(mySlice.RightHalf().ContractedBy(4f), _settings.oauth);
+            _settings.oauth = Widgets.TextArea(mySlice.RightHalf().ContractedBy(4f), _settings.oauth);
 
             mySlice = fourth.BottomHalf();
             

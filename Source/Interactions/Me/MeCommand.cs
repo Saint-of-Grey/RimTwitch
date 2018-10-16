@@ -22,7 +22,7 @@ namespace RimTwitch.Interactions.Me
 #if DEBUG
                 Log.Message("Already got that name");
 #endif
-                ircClient.SendPublicChatMessage("@" + userName + "- Please be patient you are queued to be spawned");
+                ircClient.SendPublicChatMessage("@" + userName + " : Please be patient you are queued to be spawned");
                 return; //pending
             }
             
@@ -37,7 +37,7 @@ namespace RimTwitch.Interactions.Me
 #if DEBUG
                 Log.Message("Queued");
 #endif
-                ircClient.SendPublicChatMessage("@" + userName + "- Added name to the queue");
+                ircClient.SendPublicChatMessage("@" + userName + " : Added name to the queue");
                 Names.Add(userName); //queued
             }
             else
@@ -53,7 +53,7 @@ namespace RimTwitch.Interactions.Me
         {
             //TODO Command
 
-            ircClient.SendPublicChatMessage("@" + userName + ": Status: " + Summarize(me));
+            ircClient.SendPublicChatMessage("@" + userName + " : Status: " + Summarize(me));
         }
 
         private static string Summarize(Pawn me)
