@@ -77,13 +77,21 @@ namespace RimTwitch
                 }
             }
 
-            if (Widgets.ButtonText(mySlice.RightHalf().ContractedBy(2f), "Start"))
+            var isStart = Broadcast.OnAir()==null;
+            if (Widgets.ButtonText(mySlice.RightHalf().ContractedBy(2f), isStart?"Start":"Stop"))
             {
                 try
                 {
-                    Broadcast.Start(_settings.oauth, _settings.yourName, _settings.botName);
+                    if (isStart)
+                    {
+                        Broadcast.Start(_settings.oauth, _settings.yourName, _settings.botName);
 
-                    Log.Message("Startup Success");
+                        Log.Message("Startup Success");
+                    }
+                    else
+                    {
+                        Broadcast.Stop();
+                    }
                 }
                 catch (Exception e)
                 {

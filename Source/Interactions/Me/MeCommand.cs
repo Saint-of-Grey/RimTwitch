@@ -53,8 +53,10 @@ namespace RimTwitch.Interactions.Me
         private static void SummarizeMe(Pawn me, IrcClient ircClient, string userName, string command)
         {
             //TODO Command
+            
 
-            ircClient.SendPublicChatMessage("@" + userName + " : Status: " + Summarize(me));
+            var message = "@" + userName + " : Status: " + Summarize(me);
+            ircClient.SendPublicChatMessage(message);
         }
 
         private static string Summarize(Pawn me)
@@ -64,7 +66,7 @@ namespace RimTwitch.Interactions.Me
 #endif
             StringBuilder sb = new StringBuilder();
             sb.Append(me.CurJob?.GetReport(me) ?? "[Idle]");
-            sb.Append(" Health: ").Append(me.health.summaryHealth.SummaryHealthPercent * 100).Append("%");
+            sb.Append(" Health: ").Append(me.health.summaryHealth.SummaryHealthPercent * 100).Append("% ");
             foreach (var need in me.needs.AllNeeds)
             {
                 if (!need.ShowOnNeedList) continue;

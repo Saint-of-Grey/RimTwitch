@@ -13,7 +13,7 @@ namespace RimTwitch.Harmony
         [HarmonyPostfix]
         public static void Postfix(ref Name __result, Pawn pawn, string forcedLastName)
         {
-            if (pawn.RaceProps.Humanlike)
+            if (pawn.RaceProps.Humanlike && pawn.IsColonist)
             {
                 var newName = NameQueue.Names.FirstOrDefault();
                 if (newName!=null && NameQueue.Names.Remove(newName))
@@ -21,8 +21,8 @@ namespace RimTwitch.Harmony
                  
                     if (__result is NameTriple triple)
                     {
-                        __result = new NameTriple(triple.First, newName, triple.Last);
-                        Broadcast.OnAir()?.SendPublicChatMessage("@" + newName + "- You're now in the game. type `!me help` for more.");
+                        __result = new NameTriple("Twitch:", newName, newName);
+                        Broadcast.OnAir()?.SendPublicChatMessage("@" + newName + " - You're now in the game. type `!me help` for more.");
                     }
                     else
                     {
