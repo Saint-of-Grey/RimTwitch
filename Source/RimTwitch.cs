@@ -9,12 +9,14 @@ namespace RimTwitch
     {
         public static TwitchModSettings latest;
         private TwitchModSettings _settings;
+
         public RimTwitch(ModContentPack content) : base(content)
         {
             latest = this._settings = GetSettings<TwitchModSettings>();
-            
         }
-        
+
+        private bool showDetails = false;
+
         public override string SettingsCategory() => "-RimTwitch";
 
 
@@ -32,43 +34,49 @@ namespace RimTwitch
                 _settings.Clear();
                 return;
             }
-            
+
             var topHalf = inRect.TopHalf();
             var fourth = topHalf.TopHalf();
             var mySlice = fourth.TopHalf();
-            
-            Widgets.Label(mySlice.LeftHalf(), oauth.description);
-            _settings.oauth = Widgets.TextArea(mySlice.RightHalf().ContractedBy(4f), _settings.oauth);
 
-            mySlice = fourth.BottomHalf();
-            
-            Widgets.Label(mySlice.LeftHalf(), you.description);
-            _settings.yourName = Widgets.TextArea(mySlice.RightHalf().ContractedBy(4f), _settings.yourName);
+            if (showDetails)
+            {
+                Widgets.Label(mySlice.LeftHalf(), oauth.description);
+                _settings.oauth = Widgets.TextArea(mySlice.RightHalf().ContractedBy(4f), _settings.oauth);
 
-            fourth = topHalf.BottomHalf();
-            mySlice = fourth.TopHalf();
-            Widgets.Label(mySlice.LeftHalf(), bot.description);
-            _settings.botName = Widgets.TextArea(mySlice.RightHalf().ContractedBy(4f), _settings.botName);
+                mySlice = fourth.BottomHalf();
 
+                Widgets.Label(mySlice.LeftHalf(), you.description);
+                _settings.yourName = Widgets.TextArea(mySlice.RightHalf().ContractedBy(4f), _settings.yourName);
+
+                fourth = topHalf.BottomHalf();
+                mySlice = fourth.TopHalf();
+                Widgets.Label(mySlice.LeftHalf(), bot.description);
+                _settings.botName = Widgets.TextArea(mySlice.RightHalf().ContractedBy(4f), _settings.botName);
+            }
+            else
+            {
+                showDetails = Widgets.ButtonText(mySlice, "Show configuration");
+            }
 
             mySlice = inRect.BottomHalf().BottomHalf().BottomHalf().BottomHalf();
             if (Widgets.ButtonText(mySlice.LeftHalf().ContractedBy(2f), "Test"))
             {
                 try
                 {
-                    Broadcast.Start(_settings.oauth, _settings.yourName, _settings.botName).SendIrcMessage("RimWorld Twitch IRC Test");
+                    Broadcast.Start(_settings.oauth, _settings.yourName, _settings.botName)
+                        .SendIrcMessage("RimWorld Twitch IRC Test");
 
                     Broadcast.Stop();
-                    
-                    Log.Message("Test : Success");
 
+                    Log.Message("Test : Success");
                 }
                 catch (Exception e)
                 {
-                    Log.Error("Twitch IRC Failed! "+e.StackTrace);
+                    Log.Error("Twitch IRC Failed! " + e.StackTrace);
                 }
             }
-            
+
             if (Widgets.ButtonText(mySlice.RightHalf().ContractedBy(2f), "Start"))
             {
                 try
@@ -76,19 +84,18 @@ namespace RimTwitch
                     Broadcast.Start(_settings.oauth, _settings.yourName, _settings.botName);
 
                     Log.Message("Startup Success");
-
                 }
                 catch (Exception e)
                 {
-                    Log.Error("Twitch IRC Failed! "+e.StackTrace);
+                    Log.Error("Twitch IRC Failed! " + e.StackTrace);
                 }
             }
-            
+
             this._settings.Write();
         }
     }
-    
-    
+
+
     public class TwitchModSettings : ModSettings
     {
         public String oauth = "oauth:XXXXX", botName = "RimWorld", yourName = "MyAccountName";
@@ -104,7 +111,7 @@ namespace RimTwitch
         public void Clear()
         {
             oauth = "oauth:XXXXX";
-            botName = "RimWorldBot"; 
+            botName = "RimWorldBot";
             yourName = "MyAccountName";
         }
     }
