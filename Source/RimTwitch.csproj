@@ -58,6 +58,7 @@
     <Compile Include="Harmony\ModRoot.cs" />
     <Compile Include="Harmony\NameGeneratorPatch.cs" />
     <Compile Include="Interactions\Me\MeCommand.cs" />
+    <Compile Include="Interactions\Raid\RaidCommand.cs" />
     <Compile Include="IRC\Broadcast.cs" />
     <Compile Include="IRC\IrcClient.cs" />
     <Compile Include="IRC\KeepAlive.cs" />

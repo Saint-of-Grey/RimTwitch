@@ -16,4 +16,18 @@
         <defName>rimtwitch_explain_bot</defName>
         <description>Bot Name:</description>
     </HediffDef>
+    <HediffDef>
+        <defName>rimtwitch_explain_me</defName>
+        <description>Commands Available:
+            !me help : this message !die : release your pawn
+            !me cower : run to your room  
+            !me mental : Freak out about how bad this is going for you.
+            !me eat : Tell your pawn to eat
+            !me sleep : Changes your pawns schedule to get to bed at this hour
+            !me work : Changes your pawns schedule to work it at this hour
+            !me fun : Changes your pawns schedule to have fun at this hour
+            !me vomit : self expungement of the highest order,
+            !me aggressive : Sets your pawn to run at bad things
+            !me pacifist : Sets your pawn to run from bad things</description>
+    </HediffDef>
 </Defs>

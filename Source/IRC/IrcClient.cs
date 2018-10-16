@@ -56,21 +56,23 @@ namespace RimTwitch.IRC
             }
         }
 
-        public void SendPublicChatMessage(string message)
+        public void SendPublicChatMessage(string messages)
         {
-            try
-            {
-                SendIrcMessage(":" + userName + "!" + userName + "@" + userName +
-                ".tmi.twitch.tv PRIVMSG #" + channel + " :" + message);
+            if (messages.NullOrEmpty()) return;
+            foreach (var message in messages.Split('\n'))
+                try
+                {
+                    SendIrcMessage(":" + userName + "!" + userName + "@" + userName +
+                                   ".tmi.twitch.tv PRIVMSG #" + channel + " :" + message);
                 
 #if DEBUG                
-                Log.Message("Sent Pub Chat Message");
+                    Log.Message("Sent Pub Chat Message");
 #endif
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex.Message);
-            }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex.Message);
+                }
         }
 
         public string ReadMessage()
