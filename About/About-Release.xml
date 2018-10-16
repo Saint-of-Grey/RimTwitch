@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<name>RimTwitch</name>
+	<name>RimWorldTwitchIntegration</name>
 	<author>AliceCecil</author>
 	<targetVersion>0.19.2009</targetVersion>
 	<description>TwitchBot for Rimworld to create Events and Community Driven Events

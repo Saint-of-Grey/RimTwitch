@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <HediffDef>
+        <defName>rimtwitch_explain_oauth</defName>
+        <description>How Do I use this ?
+            Step 1 : Obtain IRC Oauth token : https://twitchapps.com/tmi/
+            This will give you a value like : oauth:XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            You will need to Copy that value (Crtl+C)
+            Step 2 : Paste (Ctrl+V) that value into this field:</description>
+    </HediffDef>
+    <HediffDef>
+        <defName>rimtwitch_explain_you</defName>
+        <description>Account:</description>
+    </HediffDef>
+    <HediffDef>
+        <defName>rimtwitch_explain_bot</defName>
+        <description>Bot Name:</description>
+    </HediffDef>
+</Defs>

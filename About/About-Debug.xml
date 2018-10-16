@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<name>RimTwitch - Dev Build</name>
+	<name>RimWorldTwitchIntegration</name>
 	<author>AliceCecil</author>
 	<targetVersion>0.19.2009</targetVersion>
 	<description>TwitchBot for Rimworld to create Events and Community Driven Events
@@ -12,6 +12,17 @@ Attribution-NonCommercial-NoDerivatives 4.0 International
 https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode
 
  
+        
+How Do I use this ?
+    Step 1 : Obtain IRC Oauth token : https://twitchapps.com/tmi/
+        This will give you a value like : oauth:XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        You will need to Copy that value (Crtl+C)
+    Step 2 : Launch Rimworld and Enable this mod "RimTwitch"
+    Step 3 : Click Options, then Mod Options from the first and second menus, Then choose "RimTwitch"
+    Step 4 : Paste that value into the settigns field OAUTH
+        
+        
+        
 - Commercial Use: 
 Without a use license like the following, the included licence does not allow for commercial use.
 
