@@ -1,4 +1,5 @@
 //#define DEBUG
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace RimTwitch.Interactions.Me
 #if DEBUG
             Log.Message("!me for "+userName);
 #endif
-            if (Names.Any(x=>x.EqualsIgnoreCase(userName)))
+            if (Names.Any(x => x.EqualsIgnoreCase(userName)))
             {
 #if DEBUG
                 Log.Message("Already got that name");
@@ -25,8 +26,8 @@ namespace RimTwitch.Interactions.Me
                 ircClient.SendPublicChatMessage("@" + userName + " : Please be patient you are queued to be spawned");
                 return; //pending
             }
-            
-            
+
+
 #if DEBUG
             Log.Message("Name not queued");
 #endif
@@ -42,8 +43,8 @@ namespace RimTwitch.Interactions.Me
             }
             else
                 SummarizeMe(me, ircClient, userName, message);
-            
-            
+
+
 #if DEBUG
             Log.Message("!me done");
 #endif
@@ -58,10 +59,17 @@ namespace RimTwitch.Interactions.Me
 
         private static string Summarize(Pawn me)
         {
+#if DEBUG
             Log.Message("Found you");
+#endif
             StringBuilder sb = new StringBuilder();
             sb.Append(me.CurJob?.GetReport(me) ?? "[Idle]");
-            sb.Append(" Health: ").Append(me.health.summaryHealth.SummaryHealthPercent*100).Append("%");
+            sb.Append(" Health: ").Append(me.health.summaryHealth.SummaryHealthPercent * 100).Append("%");
+            foreach (var need in me.needs.AllNeeds)
+            {
+                if (!need.ShowOnNeedList) continue;
+                sb.Append(need.LabelCap).Append(": ").Append(need.CurLevelPercentage.ToStringPercent()).Append(" ");
+            }
 
             var s = sb.ToString();
 #if DEBUG
@@ -72,7 +80,6 @@ namespace RimTwitch.Interactions.Me
 
         private static Pawn FindMe(string userName)
         {
-            
             foreach (var map in Find.Maps.ToArray())
             {
                 foreach (var pawn in map.mapPawns.AllPawns.Where(x =>
