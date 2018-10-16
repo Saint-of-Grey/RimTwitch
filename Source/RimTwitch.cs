@@ -15,7 +15,7 @@ namespace RimTwitch
             
         }
         
-        public override string SettingsCategory() => "Rim Twitch";
+        public override string SettingsCategory() => "-RimTwitch";
 
 
         public override void DoSettingsWindowContents(Rect inRect)

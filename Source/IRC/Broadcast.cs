@@ -6,44 +6,47 @@ namespace RimTwitch.IRC
     {
 
         
-        private static IrcClient IrcClient;
-        private static Loop ping, mainLoop;
+        private static IrcClient _ircClient;
+        private static Loop _ping, _mainLoop;
 
         private static string _channelName, _botName;
 
-
+        public static IrcClient OnAir()
+        {
+            return _ircClient;
+        }
         public static IrcClient Start(string twitchOAuth, string channelName, string botName)
         {
-            if (IrcClient != null) return IrcClient;
+            if (_ircClient != null) return _ircClient;
             _channelName = channelName;
             _botName = botName;
 
-            IrcClient = new IrcClient("irc.twitch.tv", 6667,
+            _ircClient = new IrcClient("irc.twitch.tv", 6667,
                 botName, twitchOAuth, channelName);
 
-            ping = new KeepAlive(IrcClient);
-            ping.Start();
+            _ping = new KeepAlive(_ircClient);
+            _ping.Start();
             
-            mainLoop = new Loop(IrcClient);
-            mainLoop.Start();
+            _mainLoop = new Loop(_ircClient);
+            _mainLoop.Start();
 
-            return IrcClient;
+            return _ircClient;
         }
 
         public static void Stop()
         {
-            if (IrcClient == null) return;
-            ping?.Stop();
-            mainLoop?.Stop();
-            IrcClient = null;
+            if (_ircClient == null) return;
+            _ping?.Stop();
+            _mainLoop?.Stop();
+            _ircClient = null;
         }
 
 
         public static void Tick()
         {
-            if (IrcClient == null) return;
+            if (_ircClient == null) return;
 
-            string message = IrcClient.ReadMessage();
+            string message = _ircClient.ReadMessage();
             Log.Message(message); // Print raw irc messages
 
             if (message.Contains("PRIVMSG"))
@@ -64,10 +67,10 @@ namespace RimTwitch.IRC
                 // Broadcaster commands
                 if (userName.Equals(_channelName))
                 {
-                    StateMachine.AdminStateMachine(IrcClient, message);
+                    StateMachine.AdminStateMachine(_ircClient, message);
                 }
 
-                StateMachine.StateMachineBehaviour(IrcClient, userName, message);
+                StateMachine.StateMachineBehaviour(_ircClient, userName, message);
             }
         }
     }

@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony, Version=1.2.0.1, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\DarkIntentions-Woohooer\Assemblies\0Harmony.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-CSharp, Version=0.19.6814.14609, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
@@ -52,6 +55,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Harmony\ModRoot.cs" />
+    <Compile Include="Harmony\NameGeneratorPatch.cs" />
+    <Compile Include="Interactions\Me\MeCommand.cs" />
     <Compile Include="IRC\Broadcast.cs" />
     <Compile Include="IRC\IrcClient.cs" />
     <Compile Include="IRC\KeepAlive.cs" />

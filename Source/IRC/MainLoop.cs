@@ -27,7 +27,7 @@ namespace RimTwitch.IRC
             while (!Stopped)
             {
                 Broadcast.Tick();
-                Thread.Sleep(10);
+                Thread.Sleep(1);
             }
         }
 
