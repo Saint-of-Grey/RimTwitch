@@ -16,20 +16,20 @@ namespace RimTwitch.Harmony
             if (pawn.RaceProps.Humanlike && pawn.IsColonist)
             {
                 var newName = NameQueue.Names.FirstOrDefault();
-                if (newName!=null && NameQueue.Names.Remove(newName))
+                if (__result is NameTriple triple)
                 {
-                 
-                    if (__result is NameTriple triple)
+                    if (newName != null && NameQueue.Names.Remove(newName))
                     {
                         __result = new NameTriple("Twitch:", newName, newName);
-                        Broadcast.OnAir()?.SendPublicChatMessage("@" + newName + " - You're now in the game. type `!me help` for more.");
+                        Broadcast.OnAir()
+                            ?.SendPublicChatMessage("@" + newName +
+                                                    " - You're now in the game. type `!me help` for more.");
                     }
                     else
                     {
                         //maybe next time
                     }
                 }
-
             }
         }
     }
