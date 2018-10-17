@@ -31,6 +31,7 @@
             !me work X : Changes your pawns schedule to work it at this hour
             !me fun X : Changes your pawns schedule to have fun at this hour
             !me now : have your pawn enter the map.
+            !me attack : try and attack stuff
             !me : details about you currently</description>
     </HediffDef>
 
@@ -46,6 +47,7 @@
             !raid pacifist : Sets your pawn to run from bad things
             !raid now : have your raider enter the map. Good luck making friends.
             !raid escape : try and escape imprisonment.
+            !raid attack : try and attack stuff
             !raid : details about you currently.</description>
     </HediffDef>
 </Defs>

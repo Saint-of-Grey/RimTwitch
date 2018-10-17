@@ -1,15 +1,11 @@
 //#define DEBUG
 
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Text;
-using Harmony;
 using JetBrains.Annotations;
 using RimTwitch.IRC;
 using RimWorld;
 using Verse;
-using Verse.AI;
 
 namespace RimTwitch.Interactions.Me
 {
@@ -74,20 +70,20 @@ namespace RimTwitch.Interactions.Me
                 }
                 else if (command.StartsWith(MeCommands.fun.ToString()))
                 {
-                    foreach (var i in PawnCommand.getTimeSpan(me, command))
+                    foreach (var i in me.getTimeSpan(command))
                         FunTime(me, message, i);
                 }
 
                 else if (command.StartsWith(MeCommands.sleep.ToString()))
                 {
-                    foreach (var i in PawnCommand.getTimeSpan(me, command))
+                    foreach (var i in me.getTimeSpan(command))
 
                         SleepTime(me, message, i);
                 }
 
                 else if (command.StartsWith(MeCommands.work.ToString()))
                 {
-                    foreach (var i in PawnCommand.getTimeSpan(me, command))
+                    foreach (var i in me.getTimeSpan(command))
                         Work(me, message, i);
                 }
                 else
@@ -136,6 +132,7 @@ namespace RimTwitch.Interactions.Me
         vomit,
         aggressive,
         pacifist,
-        now
+        now,
+        attack
     }
 }
