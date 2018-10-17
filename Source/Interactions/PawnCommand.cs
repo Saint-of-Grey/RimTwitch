@@ -177,21 +177,14 @@ namespace RimTwitch.Interactions
         public static void RenamePawnIfCan(this Pawn pawn)
         {
             var pawnName = pawn.Name;
-            if (pawnName is NameTriple triple)
-            {
-                if (!triple.First.EqualsIgnoreCase(twitch))
-                {
-                    ReNamePawn(pawn, ref pawnName);
-                    pawn.Name = pawnName;
-                    
-                    
-                } 
-            }
+            if (!(pawnName is NameTriple triple)) return;
+            if (triple.First.EqualsIgnoreCase(twitch)) return;
+            pawn.Name = ReNamePawn(pawn, pawnName);
         }
 
-        public static void ReNamePawn(this Pawn pawn, ref Name __result , bool allowRaiders = true)
+        public static Name ReNamePawn(this Pawn pawn, Name initial , bool allowRaiders = true)
         {
-            if (!pawn.RaceProps.Humanlike) return;
+            if (!pawn.RaceProps.Humanlike) return initial;
 
             List<string> names;
             bool raider = false;
@@ -200,25 +193,25 @@ namespace RimTwitch.Interactions
             {
                 names = MeCommand.Names;
             }
-            else if (allowRaiders && pawn.Faction.GoodwillWith(Faction.OfPlayer) < -20)
+            else if (allowRaiders && pawn?.Faction?.GoodwillWith(Faction.OfPlayer) < -20)
             {
                 raider = true;
                 names = RaidCommand.Names;
             }
             else
             {
-                return;
+                return initial;
             }
 
             var newName = names.FirstOrDefault();
 
 
-            if (!(__result is NameTriple triple)) return;
+            if (!(initial is NameTriple triple)) return initial;
 
             if (newName != null && names.Remove(newName))
             {
                 
-                __result = new NameTriple(twitch, newName, raider ? "Raider" : newName);
+                var __result = new NameTriple(twitch, newName, raider ? "Raider" : newName);
 
                 //preserve pawn
 
@@ -226,11 +219,15 @@ namespace RimTwitch.Interactions
                     ?.SendPublicChatMessage("@" + newName +
                                             " - You're now in the game. type `!" + (raider ? "raid" : "me") +
                                             " help` for what you can do.");
+
+                return __result;
             }
             else
             {
                 //maybe next time
             }
+
+            return initial;
         }
     }
 }

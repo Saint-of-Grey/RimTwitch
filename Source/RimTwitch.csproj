@@ -55,7 +55,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events\Death.cs" />
     <Compile Include="Harmony\ModRoot.cs" />
     <Compile Include="Harmony\NameGeneratorPatch.cs" />
     <Compile Include="Interactions\Me\MeCommand.cs" />
@@ -67,6 +66,7 @@
     <Compile Include="IRC\KeepAlive.cs" />
     <Compile Include="IRC\MainLoop.cs" />
     <Compile Include="IRC\StateMachine.cs" />
+    <Compile Include="LoginManger.cs" />
     <Compile Include="RimTwitch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

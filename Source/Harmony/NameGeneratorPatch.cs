@@ -11,7 +11,7 @@ namespace RimTwitch.Harmony
         [HarmonyPostfix]
         public static void Postfix(ref Name __result, Pawn pawn, string forcedLastName)
         {
-            pawn.ReNamePawn(ref __result, false);
+            __result = pawn.ReNamePawn( __result, false);
         }
     }
 }
