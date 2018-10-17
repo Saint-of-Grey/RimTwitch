@@ -64,6 +64,7 @@ namespace RimTwitch.Interactions.Me
             command = command?.Substring(3)?.Trim()?.ToLower();
             if (!command.NullOrEmpty())
             {
+                if(PawnCommand.CommonPawnCommands(me, command, message)) {} else
                 if (command.StartsWith(MeCommands.help.ToString()))
                 {
                     if (helpText == null)
@@ -71,36 +72,6 @@ namespace RimTwitch.Interactions.Me
                     //Help Text
                     message.Append(helpText.description);
                 }
-                else if (command.StartsWith(MeCommands.die.ToString()))
-                {
-                    PawnCommand.Die(me, message);
-                }
-                else if (command.StartsWith(MeCommands.vomit.ToString()))
-                {
-                    PawnCommand.Barf(me);
-                    message.Append(" nice one!");
-                }
-                else if (command.StartsWith(MeCommands.cower.ToString()))
-                {
-                    message.Append(PawnCommand.RunAndFlee(me) ? "RUN AWAY!!!" : "Nothing to flee from.");
-                }
-                else if (command.StartsWith(MeCommands.aggressive.ToString()))
-                {
-                    me.playerSettings.hostilityResponse = HostilityResponseMode.Attack;
-                    message.Append("will now attack the bad dudes!");
-                }
-                else if (command.StartsWith(MeCommands.pacifist.ToString()))
-                {
-                    me.playerSettings.hostilityResponse = HostilityResponseMode.Flee;
-                    message.Append("will now bravely run away!");
-                }
-
-                else if (command.StartsWith(MeCommands.eat.ToString()))
-                {
-                    message.Append(PawnCommand.EatSomething(me) ? "Eating!" : "Not hungry");
-                }
-
-
                 else if (command.StartsWith(MeCommands.fun.ToString()))
                 {
                     foreach (var i in PawnCommand.getTimeSpan(me, command))
@@ -118,11 +89,6 @@ namespace RimTwitch.Interactions.Me
                 {
                     foreach (var i in PawnCommand.getTimeSpan(me, command))
                         Work(me, message, i);
-                }
-
-                else if (command.StartsWith(MeCommands.mental.ToString()))
-                {
-                    PawnCommand.MentalBreak(me, message);
                 }
                 else
                 {

@@ -29,7 +29,9 @@
             For sleep, work and fun : X Can be day, dawn, morning, noon, evening, night, midnight, always, now
             !me sleep X : Changes your pawns schedule to get to bed at this hour
             !me work X : Changes your pawns schedule to work it at this hour
-            !me fun X : Changes your pawns schedule to have fun at this hour</description>
+            !me fun X : Changes your pawns schedule to have fun at this hour
+            !me now : have your pawn enter the map.
+            !me : details about you currently</description>
     </HediffDef>
 
     <HediffDef>
@@ -43,6 +45,7 @@
             !raid aggressive : Sets your pawn to run at bad things
             !raid pacifist : Sets your pawn to run from bad things
             !raid now : have your raider enter the map. Good luck making friends.
-            !raid escape : try and escape imprisonment.</description>
+            !raid escape : try and escape imprisonment.
+            !rain : details about you currently.</description>
     </HediffDef>
 </Defs>

@@ -233,6 +233,12 @@ namespace RimTwitch.Interactions
         public static void Enter(Pawn pawn, StringBuilder message)
         {
             var map = Find.CurrentMap;
+
+            if (pawn.Map == map)
+            {
+                message.Append("You're already on the current map");
+                return;
+            }
             
             IntVec3 intVec = DropCellFinder.RandomDropSpot(map);
             
@@ -275,6 +281,50 @@ namespace RimTwitch.Interactions
             DropPodUtility.MakeDropPodAt(intVec, map, activeDropPodInfo);
 
             message.Append(text);
+        }
+
+        public static bool CommonPawnCommands(Pawn me, string command, StringBuilder message)
+        {
+            if (command.StartsWith(MeCommands.die.ToString()))
+            {
+                PawnCommand.Die(me, message);
+            }
+            else if (command.StartsWith(MeCommands.eat.ToString()))
+            {
+                message.Append(PawnCommand.EatSomething(me) ? "Eating!" : "Not hungry");
+            }
+            else if (command.StartsWith(MeCommands.vomit.ToString()))
+            {
+                PawnCommand.Barf(me);
+                message.Append(" nice one!");
+            }
+            else if (command.StartsWith(MeCommands.cower.ToString()))
+            {
+                message.Append(PawnCommand.RunAndFlee(me) ? "RUN AWAY!!!" : "Nothing to flee from.");
+            }
+            else if (command.StartsWith(MeCommands.aggressive.ToString()))
+            {
+                if (me.playerSettings == null) me.playerSettings = new Pawn_PlayerSettings(me);
+                me.playerSettings.hostilityResponse = HostilityResponseMode.Attack;
+                message.Append("will now attack the bad dudes!");
+            }
+            else if (command.StartsWith(MeCommands.pacifist.ToString()))
+            {
+                if (me.playerSettings == null) me.playerSettings = new Pawn_PlayerSettings(me);
+                me.playerSettings.hostilityResponse = HostilityResponseMode.Flee;
+                message.Append("will now bravely run away!");
+            }
+
+            else if (command.StartsWith(MeCommands.mental.ToString()))
+            {
+                PawnCommand.MentalBreak(me, message);
+            }
+            else
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

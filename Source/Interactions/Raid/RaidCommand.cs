@@ -57,8 +57,10 @@ namespace RimTwitch.Interactions.Raid
             var message = new StringBuilder("@" + userName + " : ");
 
             command = command?.Substring(command.IndexOf(" "))?.Trim()?.ToLower();
+            
             if (!command.NullOrEmpty())
             {
+                if(PawnCommand.CommonPawnCommands(me, command, message)) {} else
                 if (command.StartsWith(MeCommands.help.ToString()))
                 {
                     if (helpText == null)
@@ -66,41 +68,6 @@ namespace RimTwitch.Interactions.Raid
                     //Help Text
                     message.Append(helpText.description);
                 }
-                else if (command.StartsWith(MeCommands.die.ToString()))
-                {
-                    PawnCommand.Die(me, message);
-                }
-                else if (command.StartsWith(MeCommands.eat.ToString()))
-                {
-                    message.Append(PawnCommand.EatSomething(me) ? "Eating!" : "Not hungry");
-                }
-                else if (command.StartsWith(MeCommands.vomit.ToString()))
-                {
-                    PawnCommand.Barf(me);
-                    message.Append(" nice one!");
-                }
-                else if (command.StartsWith(MeCommands.cower.ToString()))
-                {
-                    message.Append(PawnCommand.RunAndFlee(me) ? "RUN AWAY!!!" : "Nothing to flee from.");
-                }
-                else if (command.StartsWith(MeCommands.aggressive.ToString()))
-                {
-                    if(me.playerSettings == null) me.playerSettings = new Pawn_PlayerSettings(me);
-                    me.playerSettings.hostilityResponse = HostilityResponseMode.Attack;
-                    message.Append("will now attack the bad dudes!");
-                }
-                else if (command.StartsWith(MeCommands.pacifist.ToString()))
-                {
-                    if(me.playerSettings == null) me.playerSettings = new Pawn_PlayerSettings(me);
-                    me.playerSettings.hostilityResponse = HostilityResponseMode.Flee;
-                    message.Append("will now bravely run away!");
-                }
-
-                else if (command.StartsWith(MeCommands.mental.ToString()))
-                {
-                    PawnCommand.MentalBreak(me, message);
-                }
-                
                 else if (command.StartsWith(RaidCommands.now.ToString()))
                 {
                     PawnCommand.Enter(me, message);
