@@ -56,7 +56,7 @@ namespace RimTwitch.Interactions.Raid
             
             var message = new StringBuilder("@" + userName + " : ");
 
-            command = command?.Substring(4)?.Trim()?.ToLower();
+            command = command?.Substring(command.IndexOf(" "))?.Trim()?.ToLower();
             if (!command.NullOrEmpty())
             {
                 if (command.StartsWith(MeCommands.help.ToString()))
@@ -69,6 +69,10 @@ namespace RimTwitch.Interactions.Raid
                 else if (command.StartsWith(MeCommands.die.ToString()))
                 {
                     PawnCommand.Die(me, message);
+                }
+                else if (command.StartsWith(MeCommands.eat.ToString()))
+                {
+                    message.Append(PawnCommand.EatSomething(me) ? "Eating!" : "Not hungry");
                 }
                 else if (command.StartsWith(MeCommands.vomit.ToString()))
                 {
@@ -99,7 +103,7 @@ namespace RimTwitch.Interactions.Raid
                 
                 else if (command.StartsWith(RaidCommands.now.ToString()))
                 {
-                    Enter(me, message);
+                    PawnCommand.Enter(me, message);
                 }
                 else if (command.StartsWith(RaidCommands.escape.ToString()))
                 {
@@ -118,12 +122,15 @@ namespace RimTwitch.Interactions.Raid
             ircClient.SendPublicChatMessage(message.ToString());
         }
 
-        private static void Enter(Pawn me, StringBuilder message)
-        {
-        }
-
         private static void Escape(Pawn me, StringBuilder message)
         {
+            if (!me.IsPrisoner)
+            {
+                message.Append("You're not in jail?");
+                return;
+            }
+            
+            PrisonBreakUtility.StartPrisonBreak(me);
         }
     }
 
