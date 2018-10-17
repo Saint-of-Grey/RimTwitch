@@ -36,27 +36,8 @@ namespace RimTwitch.Interactions
 #endif
             return null;
         }
-
-        public static string Summarize(this Pawn me)
-        {
-#if DEBUG
-            Log.Message("Found you");
-#endif
-            StringBuilder sb = new StringBuilder();
-            sb.Append(me.CurJob?.GetReport(me) ?? "[Idle]");
-            sb.Append(" HP: ").Append(me.health.summaryHealth.SummaryHealthPercent * 100).Append("% ");
-            foreach (var need in me.needs.AllNeeds)
-            {
-                if (!need.ShowOnNeedList) continue;
-                sb.Append(need.LabelCap).Append(": ").Append(need.CurLevelPercentage.ToStringPercent()).Append(" ");
-            }
-
-            var s = sb.ToString();
-#if DEBUG
-            Log.Message("Sending Summary : "+s);
-#endif
-            return s;
-        }
+        
+        public static HediffDef _AttackOrderDef = DefDatabase<HediffDef>.GetNamed("rim_twitch_attack_order");
 
         private static JobGiver_AIFightEnemies fight = new JobGiver_AIFightEnemies();
         private static JobGiver_ConfigurableHostilityResponse response = new JobGiver_ConfigurableHostilityResponse();
@@ -93,6 +74,7 @@ namespace RimTwitch.Interactions
         public static bool AttackSomething(this Pawn me)
         {
             var result = (Job) Fight.Invoke(fight, new object[] {me});
+            me.health.AddHediff(_AttackOrderDef);
             return StartJobIfCan(me, result);
         }
 

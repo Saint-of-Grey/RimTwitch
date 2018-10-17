@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <HediffDef>
+        <hediffClass>HediffWithComps</hediffClass>
+        <defName>rim_twitch_attack_order</defName>
+        <label>Attack Order</label>
+        <description>Attack order!</description>
+        <initialSeverity>1</initialSeverity>
+        <maxSeverity>1</maxSeverity>
+        <tendable>false</tendable>
+        <isBad>false</isBad>
+        <comps>
+            <li Class="HediffCompProperties_SeverityPerDay">
+                <severityPerDay>-6</severityPerDay>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <becomeVisible>false</becomeVisible>
+                <painOffset>-0.24</painOffset>
+            </li>
+        </stages>
+    </HediffDef>
+</Defs>

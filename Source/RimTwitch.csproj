@@ -73,9 +73,7 @@
     <Compile Include="LoginManger.cs" />
     <Compile Include="RimTwitch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="utils" />
+    <Compile Include="utils\ThinkNode_ConditionalHediff.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
