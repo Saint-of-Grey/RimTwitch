@@ -319,6 +319,11 @@ namespace RimTwitch.Interactions
             {
                 PawnCommand.MentalBreak(me, message);
             }
+            
+            else if (command.StartsWith(MeCommands.now.ToString()))
+            {
+                PawnCommand.Enter(me, message);
+            }
             else
             {
                 return false;

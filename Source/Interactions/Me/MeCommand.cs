@@ -135,6 +135,7 @@ namespace RimTwitch.Interactions.Me
         fun,
         vomit,
         aggressive,
-        pacifist
+        pacifist,
+        now
     }
 }

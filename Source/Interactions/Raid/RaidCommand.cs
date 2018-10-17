@@ -51,12 +51,12 @@ namespace RimTwitch.Interactions.Raid
 
         }
 
-        private static void DoRaider(Pawn me, IrcClient ircClient, string userName, string command)
+        private static void DoRaider(Pawn me, IrcClient ircClient, string userName, string cmd)
         {
             
             var message = new StringBuilder("@" + userName + " : ");
 
-            command = command?.Substring(command.IndexOf(" "))?.Trim()?.ToLower();
+            var command = cmd?.Substring(5)?.Trim()?.ToLower();
             
             if (!command.NullOrEmpty())
             {
@@ -67,10 +67,6 @@ namespace RimTwitch.Interactions.Raid
                         helpText = DefDatabase<HediffDef>.GetNamedSilentFail("rimtwitch_explain_raid");
                     //Help Text
                     message.Append(helpText.description);
-                }
-                else if (command.StartsWith(RaidCommands.now.ToString()))
-                {
-                    PawnCommand.Enter(me, message);
                 }
                 else if (command.StartsWith(RaidCommands.escape.ToString()))
                 {
@@ -103,7 +99,6 @@ namespace RimTwitch.Interactions.Raid
 
     public enum RaidCommands
     {
-        now, 
         escape
     }
 }

@@ -46,6 +46,6 @@
             !raid pacifist : Sets your pawn to run from bad things
             !raid now : have your raider enter the map. Good luck making friends.
             !raid escape : try and escape imprisonment.
-            !rain : details about you currently.</description>
+            !raid : details about you currently.</description>
     </HediffDef>
 </Defs>
