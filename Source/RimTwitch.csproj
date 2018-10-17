@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Harmony\LetterPatch.cs" />
     <Compile Include="Harmony\ModRoot.cs" />
     <Compile Include="Harmony\NameGeneratorPatch.cs" />
     <Compile Include="Interactions\Me\MeCommand.cs" />

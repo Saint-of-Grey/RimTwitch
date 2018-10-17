@@ -14,7 +14,7 @@ namespace RimTwitch.Interactions
 {
     public static class PawnCommand
     {
-        const string twitch = "Twitch:";
+        public static string twitch = "Twitch:";
         
         public static Pawn FindMe(string userName)
         {
