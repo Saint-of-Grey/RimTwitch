@@ -23,11 +23,12 @@
             !me cower : run to your room  
             !me mental : Freak out about how bad this is going for you.
             !me eat : Tell your pawn to eat
-            !me sleep : Changes your pawns schedule to get to bed at this hour
-            !me work : Changes your pawns schedule to work it at this hour
-            !me fun : Changes your pawns schedule to have fun at this hour
             !me vomit : self expungement of the highest order,
             !me aggressive : Sets your pawn to run at bad things
-            !me pacifist : Sets your pawn to run from bad things</description>
+            !me pacifist : Sets your pawn to run from bad things
+            For sleep, work and fun : X Can be day, dawn, morning, noon, evening, night, midnight, always, now
+            !me sleep X : Changes your pawns schedule to get to bed at this hour
+            !me work X : Changes your pawns schedule to work it at this hour
+            !me fun X : Changes your pawns schedule to have fun at this hour</description>
     </HediffDef>
 </Defs>
