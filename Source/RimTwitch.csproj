@@ -55,9 +55,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\Death.cs" />
     <Compile Include="Harmony\ModRoot.cs" />
     <Compile Include="Harmony\NameGeneratorPatch.cs" />
     <Compile Include="Interactions\Me\MeCommand.cs" />
+    <Compile Include="Interactions\Me\Times.cs" />
+    <Compile Include="Interactions\PawnCommand.cs" />
     <Compile Include="Interactions\Raid\RaidCommand.cs" />
     <Compile Include="IRC\Broadcast.cs" />
     <Compile Include="IRC\IrcClient.cs" />

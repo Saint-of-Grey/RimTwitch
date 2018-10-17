@@ -19,7 +19,7 @@
     <HediffDef>
         <defName>rimtwitch_explain_me</defName>
         <description>Commands Available:
-            !me help : this message !die : release your pawn
+            !me help : this message !me die : release your pawn
             !me cower : run to your room  
             !me mental : Freak out about how bad this is going for you.
             !me eat : Tell your pawn to eat
@@ -30,5 +30,19 @@
             !me sleep X : Changes your pawns schedule to get to bed at this hour
             !me work X : Changes your pawns schedule to work it at this hour
             !me fun X : Changes your pawns schedule to have fun at this hour</description>
+    </HediffDef>
+
+    <HediffDef>
+        <defName>rimtwitch_explain_raid</defName>
+        <description>Commands Available:
+            !raid help : this message !raid die : release your pawn
+            !raid cower : run away
+            !raid mental : Freak out about how bad this is going for you.
+            !raid eat : Tell your pawn to eat
+            !raid vomit : self expungement of the highest order,
+            !raid aggressive : Sets your pawn to run at bad things
+            !raid pacifist : Sets your pawn to run from bad things
+            !raid now : have your raider enter the map. Good luck making friends.
+            !raid escape : try and escape imprisonment.</description>
     </HediffDef>
 </Defs>

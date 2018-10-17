@@ -1,7 +1,5 @@
-using System.Linq;
 using Harmony;
-using RimTwitch.Interactions.Me;
-using RimTwitch.IRC;
+using RimTwitch.Interactions;
 using RimWorld;
 using Verse;
 
@@ -13,24 +11,7 @@ namespace RimTwitch.Harmony
         [HarmonyPostfix]
         public static void Postfix(ref Name __result, Pawn pawn, string forcedLastName)
         {
-            if (pawn.RaceProps.Humanlike && pawn.IsColonist)
-            {
-                var newName = NameQueue.Names.FirstOrDefault();
-                if (__result is NameTriple triple)
-                {
-                    if (newName != null && NameQueue.Names.Remove(newName))
-                    {
-                        __result = new NameTriple("Twitch:", newName, newName);
-                        Broadcast.OnAir()
-                            ?.SendPublicChatMessage("@" + newName +
-                                                    " - You're now in the game. type `!me help` for more.");
-                    }
-                    else
-                    {
-                        //maybe next time
-                    }
-                }
-            }
+            pawn.ReNamePawn(ref __result, false);
         }
     }
 }

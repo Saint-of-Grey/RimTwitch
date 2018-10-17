@@ -1,6 +1,8 @@
 #define DEBUG
 using System;
+using System.Linq;
 using RimTwitch.Interactions.Me;
+using RimTwitch.Interactions.Raid;
 using Verse;
 
 namespace RimTwitch.IRC
@@ -12,12 +14,37 @@ namespace RimTwitch.IRC
 
         public State currentState = State.NoGame;
 
-        public static void AdminStateMachine(IrcClient ircClient, string message)
+        public static bool AdminStateMachine(IrcClient ircClient, string message)
         {
+            if (message.StartsWith("!admin raid"))
+            {
+                var points = message.Split(' ').ToArray()[2].Trim();
+                if (!points.NullOrEmpty())
+                {
+                    Log.Message("Admin Raid! (" + points + ")");
+                    int val;
+                    if (Int32.TryParse(points, out val))
+                    {
+                        
+                        RaidCommand.Start(val);
+                    }
+                    else
+                    {
+                        Log.Error("Couldnt parse that");
+                    }
+
+                    return true;
+                }
+            }
             if (message.Equals("!exitbot"))
             {
                 Broadcast.Stop();
+                
+                return true;
             }
+
+            return false;
+            ;
         }
 
         public static void StateMachineBehaviour(IrcClient ircClient, string userName, string message)
@@ -28,12 +55,15 @@ namespace RimTwitch.IRC
                 // General commands anyone can use
                 if (message.Equals("!help"))
                 {
-                    ircClient.SendPublicChatMessage("Help Not Available.");
+                    ircClient.SendPublicChatMessage("!help - This message, !me help for TwitchPlays Colonist commands, !raid help for TwitchPlays Raider commands, you may be both");
                 }
-                else if (message.Contains("!me"))
+                else if (message.StartsWith("!me"))
                 {
-                    NameQueue.Me(ircClient, userName, message);
-                    Log.Message("Me Done");
+                    MeCommand.Me(ircClient, userName, message);
+                }
+                else if (message.StartsWith("!raid"))
+                {
+                    RaidCommand.Me(ircClient, userName, message);
                 }
                 else if (message.Equals("!hello"))
                 {
