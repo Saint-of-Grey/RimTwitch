@@ -3,7 +3,7 @@ Twitch Chat-bot for RimWorld Events
 
 TwitchBot for Rimworld to create Events and Community Driven Events
         
-Your game will be Watermarked with a donation ad for my favorite charity Girl Develop It.
+Your game will be "Chat marked" with a donation ad for my favorite charity Girl Develop It.
 
 # Read the License
 Attribution-NonCommercial-NoDerivatives 4.0 International
