@@ -1,3 +1,5 @@
+Panic Forked after the author indicated they might delete their repositories. Left unedited for now.
+
 # RimTwitch
 Twitch Chat-bot for RimWorld Events
 
